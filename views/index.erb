@@ -20,16 +20,20 @@ function validateForm()
 <body>
 <% if session[:username] %>
 	Welcome, <%= session[:username] %>!<br /><br />
-<form name="butt" action="" method="post" onSubmit="return validateForm()">
-	Place your bets! 
-	<br />
-	<input type="number" name="bet" />	
-	<br />
-	<input type="submit" name="player" value="Player 1" />
-	<input type="submit" name="player" value="Player 2" />
-</form>
+	Your bucks: <%= $db.execute("SELECT Bucks FROM Users WHERE Name IS \"#{session[:username]}\"")[0][0] %>
+	<form name="butt" action="" method="post" onSubmit="return validateForm()">
+		Place your bets! 
+		<br />
+		<input type="number" name="bet" />	
+		<br />
+		<input type="submit" name="player" value="Player 1" />
+		<input type="submit" name="player" value="Player 2" />
+	</form>
+	<form name="salty" action="/logout">
+		<input type="submit" value="Log Out" />
+	</form>
 <% else %>
-	Nope!
+
 <% end %>
 </body>
 
