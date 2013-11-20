@@ -1,0 +1,588 @@
+/* GLOBAL
+----------------------------------*/
+html,body{
+    font-family: 'Abel',sans-serif;
+    margin: 0px;
+    padding: 0px;
+    height:100%;
+}
+div#wrapper{
+    margin: 0 auto;
+    height:100%;
+}
+div#bottom{
+    height: 375px;
+}
+#content{
+    height: auto;
+    position: absolute;
+    top: 43px;
+    bottom: 50px;
+    left: 0px;
+    right: 0px;
+    overflow-y: scroll;
+    margin: 0;
+}
+/*Text*/
+p{
+    font-size:.8em;
+    margin:0;
+    line-height: 26px;
+}
+h1{
+    font-weight: 600;
+    margin: 20px 0 0 0;
+    font-size:28px;
+}
+h2{
+    font-weight: 100;
+    font-size: 18px;
+    margin: 0;
+}
+h3{
+    font-weight: 500;
+    font-size: 20px;
+}
+.greentext{
+    color: green;
+}
+.redtext{
+    color: #D14836;
+}
+.bluetext{
+    color: rgb(52, 158, 255);
+}
+.goldtext{
+    color: darkgoldenrod;
+}
+.error{
+    font-size: 16px;
+    color: #cd0a0a;
+}
+.green{
+    color:#00FF9C;;
+}
+.hudtext{
+    font-weight:100;
+    color:lightgray;
+}
+/*Links + buttons + images*/
+a{
+    color: darkgreen;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    text-decoration: none;
+    transition:.5s;
+}
+a:not(.greenbutton):not(.graybutton):hover{
+    color: darkgoldenrod;
+}
+.graybutton:hover, .greenbutton:hover{
+    background:goldenrod;
+    border: 1px solid darkgoldenrod;
+    color:white;
+}
+img {
+    border-width: 0;
+}
+::selection {
+    background-color: #336633;
+    color: #fff;
+}
+::-moz-selection {
+    background-color: #336633;
+    color: #fff;
+}
+/*Footer*/
+#footer{
+    position: absolute;
+    /*bottom: -106px;
+    height: 145px;*/
+    bottom: 0px;
+    height: 40px;
+    left: 0px;
+    right: 0px;
+    border-top: 1px solid darkgreen;
+    padding-top:5px;
+}
+.footerleft{
+    float: left;
+    width:125px;
+    height:30px;
+    margin-left:15px;
+    margin-top:10px;
+}
+.footerright{
+    float: right;
+    width:250px;
+    text-align:right;
+    margin-right:15px;
+    margin-top:10px;
+}
+.footercenter{
+    float: center;
+    text-align:center;
+    width:50%;
+    margin-top:10px;
+}
+.goldfooter{
+    bottom: 9px !important;
+    height: auto !important;
+}
+#ad{
+    text-align:center;
+    margin-top:15px;
+}
+/*Header*/
+div#header{
+    height:40px;
+    margin:0;
+    text-align:center;
+    border-bottom: 1px solid black;
+    padding-bottom: 1px;
+}
+#nav-menu{
+    position:absolute; 
+    right:0;
+    display:inline-block;
+}
+#nav-menu ul{
+    float: right;
+    list-style: none;
+    margin: 6px;
+}
+#nav-menu li{
+    float: left;
+    margin: 0 .6em;
+}
+/* Positioning*/
+.left{
+    float: left;
+    display: inline-block;
+}
+.right{
+    float:right;
+    display: inline-block;
+}
+.center{
+    float:left;
+    display: inline-block;
+    margin: 75px 0 0 66px;
+}
+label {
+    display:block;
+}
+.nomargin{
+    margin: 0;
+}
+.horizontal{
+    border-bottom:1px solid #EBEBEB;
+    width:90%;
+    margin: 10px auto 20px auto;
+}
+
+/* AUTHENTICATION
+----------------------------------*/
+.fancyform{
+    padding: 30px 15px 0 15px;
+    margin:30px;
+    background: #E6EAED;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -o-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+}
+.fancyform span.field{
+    width: 175px;
+    display:inline-block;
+    font-size: 1em;
+}
+.fancyform input:not([type=submit]):not([type=file]){
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    border-radius: 25px;
+    padding: 3px;
+    background: white;
+    margin: 0 0 10px 0;
+    border:0px;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -o-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+}
+.greenbutton{
+    font-weight: bold;
+    padding: 5px 17px;
+    cursor: pointer;
+    border: 1px solid;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: rgb(68, 176, 111);
+    background-image: -moz-linear-gradient(rgb(109, 221, 154), rgb(68, 176, 111));
+    background-image: -webkit-linear-gradient(rgb(109, 221, 154), rgb(68, 176, 111));
+    background-image: linear-gradient(rgb(109, 221, 154), rgb(68, 176, 111));
+    background-repeat: repeat-x;
+    border-color: rgb(39, 139, 39);
+}
+.graybutton{
+    padding: 5px 17px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    background: #E6EAED;
+    background: -webkit-linear-gradient(white,#E6EAED);
+    background: -moz-linear-gradient(white,#E6EAED);
+    background: -ms-linear-gradient(white,#E6EAED);
+    background: -o-linear-gradient(white,#E6EAED);
+    background: linear-gradient(white,#E6EAED);
+    border: 1px solid #BFC1C4;
+}
+.greenbutton, .graybutton{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+}
+/*Index
+----------------------------------*/
+#headline{
+    margin:0 80px;
+    border-bottom: 1px solid #EBEBEB;
+    padding:6px;
+}
+#landing{
+    margin:0 auto;
+    width: 80%;
+    background-color: white;
+    text-align: center;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -o-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+}
+#signup, #signin{
+    margin:0 auto;
+}
+#faq{
+    
+}
+.faqcontainer{
+    background-color:#2a2d40;
+    color:white;
+    padding:7px;
+}
+.faqcontainer h1:hover{
+    color: darkgoldenrod;
+    cursor: pointer;
+}
+.faqcontent{
+    padding:14px;
+    display:none;
+    background-color:#E0E7FF;
+    color:black;
+    text-align: left;
+}
+#faq h3{
+    padding: 0 20px 0 20px;
+}
+/*Search
+----------------------------------*/
+#result, #resultreply{
+    display:block;
+    width:100%;
+    margin-bottom:14px;
+    text-align:center;
+    min-height: 150px;
+}
+.searchname , #profilename{
+    color:#00FF9C;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-size:23px;
+    -webkit-font-smoothing: antialiased;
+}
+.searchname:hover{
+    color:#00CC99;
+}
+#resultheader{
+    background-color: #202020;
+    height:100px;
+    color: white;
+    display: inline-block;
+    width: 100%;
+}
+#resultfooter{
+    background-color: white;
+    color: black;
+    display: inline-block;
+    width: 100%;
+    height:30px;
+    line-height:30px;
+}
+#resulttext{
+    margin-top:20px;
+    margin-left:27px;
+    line-height:21px;
+}
+#resulttext2{
+    margin-top:20px;
+    margin-right:30px;
+    line-height:21px;
+    text-align: right;
+    text-overflow: ellipsis;
+    padding: 3px;
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#resultfooterleft{
+    margin-left:20px;
+    text-overflow: ellipsis;
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#resultfooterright{
+    margin-right: 30px;
+    text-overflow: ellipsis;
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: right;
+}
+/*Bettors*/
+#sbettorswrapper{
+    max-height:100%;
+    width:325px;
+    overflow-y:scroll;
+    float:left;
+}
+#bettors1{
+    border-top: 1px solid rgb(176, 68, 68);
+}
+#bettors2{
+    border-top: 1px solid rgb(52, 158, 255);
+}
+.levelimage{
+    display:inline-block;
+    float:left;
+    margin-right:5px;
+}
+/*Bottom*/
+#wagerwrapper ul{
+    list-style: none;
+    margin: 1px;
+}
+#status{
+    text-align:center;
+    padding: 4px;
+    background: #E6EAED;
+    background: -webkit-linear-gradient(white,#E6EAED);
+    background: -moz-linear-gradient(white,#E6EAED);
+    background: -ms-linear-gradient(white,#E6EAED);
+    background: -o-linear-gradient(white,#E6EAED);
+    background: linear-gradient(white,#E6EAED);
+    font-size:20px;
+    color:black;
+}
+#bottomcontent{
+    background-color: #252525;
+    color: white;
+    float: left;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    min-height:171px;
+}
+#fightcard{
+    border-top: 1px solid darkgreen;
+}
+.betcard{
+    width:50%;
+    margin: 13px;
+    padding: 12px;
+    background: rgb(65, 65, 65);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -o-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+    color:white;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 80px;
+}
+.blueborder{
+    border: 1px solid rgb(2, 81, 153);
+}
+.redborder{
+    border: 1px solid #D14836;
+}
+#p1name, #p2name{
+    font-size: 1.5em;
+
+    font-weight: 500;
+}
+#player1wager, #player2wager{
+    font-size: 1.3em;
+    font-weight: 100;
+}
+#player2wager{
+    float:right;
+}
+#wagerwrapper{
+    float:center;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top:5px;
+    padding-bottom: 5px;
+}
+#wager{
+    font-size: 1.4em;
+    border:2px solid #336633;
+    border-radius:10px;
+    background: rgb(65, 65, 65);
+    color:white;
+    outline: none; 
+}
+.betbuttonred, .betbuttonblue{
+
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    display: block;
+    padding: 4px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 9px 0px rgba(121, 60, 60, 1), 0px 9px 25px rgba(0,0,0,.7);
+    -moz-box-shadow: 0px 9px 0px rgba(121, 60, 60, 1), 0px 9px 25px rgba(0,0,0,.7);
+    box-shadow: 0px 9px 0px rgba(121, 60, 60, 1), 0px 9px 25px rgba(0,0,0,.7);
+    width: 140px;
+    height:75px;
+    text-align: center;
+    border:none;
+    background-color: rgb(176, 68, 68);
+    background-image: -moz-linear-gradient(rgb(221, 109, 109), rgb(176, 68, 68)) no-repeat top left;;
+    background-image: -webkit-linear-gradient(rgb(221, 109, 109), rgb(176, 68, 68)) no-repeat top left;;
+    background-image: linear-gradient(rgb(221, 109, 109), rgb(176, 68, 68)) no-repeat top left;;
+    background-repeat: repeat-x; 
+    background: rgb(176, 68, 68) url(bet1.png) no-repeat center center;
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+    -ms-transition: all .1s ease;
+    -o-transition: all .1s ease;
+    transition: all .1s ease;
+}
+.betbuttonblue{
+    -webkit-box-shadow: 0px 9px 0px rgba(13, 113, 204, 1), 0px 9px 25px rgba(0,0,0,.7);
+    -moz-box-shadow: 0px 9px 0px rgba(13, 113, 204, 1), 0px 9px 25px rgba(0,0,0,.7);
+    box-shadow: 0px 9px 0px rgba(13, 113, 204, 1), 0px 9px 25px rgba(0,0,0,.7);
+    background-color: rgb(52, 158, 255);
+    background-image: -moz-linear-gradient(rgb(52, 158, 255), rgb(81, 68, 176));
+    background-image: -webkit-linear-gradient(rgb(52, 158, 255), rgb(81, 68, 176));
+    background-image: linear-gradient(rgb(52, 158, 255), rgb(81, 68, 176));
+    background-repeat: repeat-x;
+    background: rgb(52, 158, 255) url(bet1.png) no-repeat center center;
+}
+.betbuttonred:active{
+    -webkit-box-shadow: 0px 3px 0px rgba(121, 60, 60, 1), 0px 3px 6px rgba(0,0,0,.9);
+    -moz-box-shadow: 0px 3px 0px rgba(121, 60, 60, 1), 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 0px rgba(121, 60, 60, 1), 0px 3px 6px rgba(0,0,0,.9);
+    position: relative;
+    top: 6px;
+}
+.betbuttonblue:active{
+    -webkit-box-shadow: 0px 3px 0px rgba(13, 113, 204, 1), 0px 3px 6px rgba(0,0,0,.9);
+    -moz-box-shadow: 0px 3px 0px rgba(13, 113, 204, 1), 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 0px rgba(13, 113, 204, 1), 0px 3px 6px rgba(0,0,0,.9);
+    position: relative;
+    top: 6px;
+}
+/*Leaderboard
+----------------------------------*/
+.leaderboard{
+    line-height:1;
+    border-spacing: 0px;
+    text-align:center;
+    margin: 20px auto;
+}
+.leaderboard td{
+    min-width: 77px;
+    padding:5px;
+}
+#pagination{
+    height:40px;
+    margin-top:10px;
+}
+/*Control
+----------------------------------*/
+#matches{
+    margin-top:50px;
+}
+#tournaments{
+    margin-top:50px;
+}
+/*Dialog
+----------------------------------*/
+.dialogcontent{
+    width:450px;
+    margin: 0 auto;
+}
+.dialogbutton{
+    text-align:center;
+    margin: 10px auto;
+}
+.dialoglabel{
+    width:140px;
+    display:inline-block;
+}
+#textmessage, #textbio{
+    width:100%;
+}
+.dialogcontent select{
+    width:302px;
+}
+.dialogcontent input:not([type=submit]):not([type=file]):not([type=checkbox]){
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    border-radius: 25px;
+    padding: 3px;
+    background: white;
+    margin: 0 0 10px 0;
+    border:0px;
+    width:302px;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    -o-box-shadow: 0 0 2px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3),0 3px 5px rgba(0, 0, 0, 0.2);
+}
