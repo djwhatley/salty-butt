@@ -1,0 +1,36 @@
+<html>
+
+<head>
+<title>Salty Butt!</title>
+
+<script>
+function validateForm()
+{
+	var bet = document.forms["butt"]["bet"].value;
+	if (bet==null || bet=="")
+	{
+		alert("You must put in a bet!");
+		return false;
+	}
+}
+
+</script>
+</head>
+
+<body>
+<% if session[:username] %>
+	Welcome, <%= session[:username] %>!<br /><br />
+<form name="butt" action="" method="post" onSubmit="return validateForm()">
+	Place your bets! 
+	<br />
+	<input type="number" name="bet" />	
+	<br />
+	<input type="submit" name="player" value="Player 1" />
+	<input type="submit" name="player" value="Player 2" />
+</form>
+<% else %>
+	Nope!
+<% end %>
+</body>
+
+</html>
