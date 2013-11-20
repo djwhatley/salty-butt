@@ -493,7 +493,7 @@ label {
     background-image: -webkit-linear-gradient(rgb(221, 109, 109), rgb(176, 68, 68)) no-repeat top left;;
     background-image: linear-gradient(rgb(221, 109, 109), rgb(176, 68, 68)) no-repeat top left;;
     background-repeat: repeat-x; 
-    background: rgb(176, 68, 68) url(bet1.png) no-repeat center center;
+    background: rgb(176, 68, 68) url(images/bet1.png) no-repeat center center;
     -webkit-transition: all .1s ease;
     -moz-transition: all .1s ease;
     -ms-transition: all .1s ease;
@@ -509,7 +509,7 @@ label {
     background-image: -webkit-linear-gradient(rgb(52, 158, 255), rgb(81, 68, 176));
     background-image: linear-gradient(rgb(52, 158, 255), rgb(81, 68, 176));
     background-repeat: repeat-x;
-    background: rgb(52, 158, 255) url(bet1.png) no-repeat center center;
+    background: rgb(52, 158, 255) url(images/bet1.png) no-repeat center center;
 }
 .betbuttonred:active{
     -webkit-box-shadow: 0px 3px 0px rgba(121, 60, 60, 1), 0px 3px 6px rgba(0,0,0,.9);
