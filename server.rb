@@ -5,30 +5,49 @@ require 'bcrypt'
 enable :sessions
 
 $db = SQLite3::Database.open("test.db")
-$db.execute("CREATE TABLE IF NOT EXISTS Users(Id INTEGER PRIMARY KEY, Name TEXT, Salt TEXT, Hash TEXT, Bucks INTEGER)")
+$db.execute("CREATE TABLE IF NOT EXISTS Users(Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Salt TEXT, Hash TEXT, Bucks INTEGER)")
+
+$bucks_min = 50
 
 get '/' do
-	erb :index
+	if session[:username]
+		erb :index
+	else
+		redirect "/login"
+	end
 end
 
 post '/' do
-	puts params
 	erb :index
 end
 
 get '/login' do
+	if session[:username]
+		redirect "/"
+	end
 	erb :login
 end
 
 post '/login' do
-	salt = BCrypt::Engine.generate_salt
-	hash = BCrypt::Engine.hash_secret(params[:password], salt)
+	if session[:username]
+		redirect "/"
+	end
+	a = $db.execute("SELECT * FROM Users WHERE Name IS \"#{params[:username]}\"")
+	if a[0]
+		salt = a[0][2]
+		if a[0][3] == BCrypt::Engine.hash_secret(params[:password], salt)
+			session[:username] = params[:username]
+		end
+	else
+		salt = BCrypt::Engine.generate_salt
+		hash = BCrypt::Engine.hash_secret(params[:password], salt)
 
-	$db.execute("INSERT INTO Users VALUES(0, #{params[:username]}, #{salt}, #{hash}, 50)")
+		$db.execute("INSERT INTO Users VALUES(NULL, \"#{params[:username]}\", \"#{salt}\", \"#{hash}\", #{$bucks_min})")
+	
+		session[:username] = params[:username]
+	end
 
-	session[:username] = params[:username]
 	redirect "/"
-	puts params
 end
 
 get '/logout' do
