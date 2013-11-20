@@ -9,6 +9,12 @@ $db.execute("CREATE TABLE IF NOT EXISTS Users(Id INTEGER PRIMARY KEY AUTOINCREME
 
 $bucks_min = 50
 
+$bets = [0,0]
+$odds = [1,2]
+$playerstats = {}
+
+$players = ["", "Player 1", "Player 2"]
+
 get '/' do
 	if session[:username]
 		erb :index
@@ -18,6 +24,9 @@ get '/' do
 end
 
 post '/' do
+	puts params
+	session[:lastbet] = params[:wager]
+	session[:lastpick] = params[:player1]=="" ? 1 : 2
 	erb :index
 end
 
