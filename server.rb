@@ -19,6 +19,8 @@ $players = ["Player 1", "Player 2"]
 $betting = false
 $status = "Waiting for the next match."
 
+$winner = nil
+
 connections = []
 
 def playerRank(name)
@@ -106,9 +108,10 @@ end
 
 post '/admin' do
 	if params[:winner] == "1" or params[:winner] == "2"
+		$winner = params[:winner].to_i-1
 		for bet in $playerbets
 			$db.exec("UPDATE Users SET Bucks = Bucks - #{bet[1][1].to_i} WHERE Name = \'#{bet[0]}\'")
-			if bet[1][0].to_i == params[:winner].to_i-1
+			if bet[1][0].to_i == $winner
 				$db.exec("UPDATE Users SET Bucks = Bucks + #{(($bets[0]+$bets[1]).to_f / $bets[bet[1][0].to_i] * bet[1][1].to_i).truncate} WHERE Name = \'#{bet[0]}\'")
 			end
 		end
@@ -132,6 +135,7 @@ post '/admin' do
 		$players[0] = params[:p1name]
 		$players[1] = params[:p2name]
 		$status = "Bets are now open"
+		$winner = nil
 	else
 		for bet in $playerbets
 			$bets[bet[1][0].to_i] += bet[1][1].to_i
