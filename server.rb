@@ -11,7 +11,7 @@ $bucks_min = 50
 
 $playerbets = {}
 $bets = [0,0]
-$odds = [1,2]
+$odds = [1,1]
 $playerstats = {}
 
 $players = ["Player 1", "Player 2"]
