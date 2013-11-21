@@ -38,8 +38,8 @@
                     <input type="number" name="wager" min="0" id="wager" placeholder="Wager"/><br/>
                     <ul>
                         <li class="menu"><span class="hudtext"> Last Bet </span><span id="lastbet">
-													<span id="lastbet" style="display: inline;"><%= session[:lastbet] != 0 ? "$"+session[:lastbet].to_s : "N/A"  %> <% if session[:lastbet] != 0 %> on <% if session[:lastpick].to_i==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span><% end %></span></span></li>
-													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $betting or session[:lastbet] == 0 %>N/A<% else %><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%= $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%= $odds[1] %></span> (<span class="greentext">$<%= session[:payout] %></span>)</span></span><% end %></li>
+													<span id="lastbet" style="display: inline;"><%= (session[:lastbet] != nil and session[:lastbet] != 0) ? "$"+session[:lastbet].to_s : "N/A"  %> <% if session[:lastbet] != 0 and session[:lastbet] != nil %> on <% if session[:lastpick].to_i==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span><% end %></span></span></li>
+													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $betting or session[:lastbet] == 0 or session[:lastbet] == nil %>N/A<% else %><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%= $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%= $odds[1] %></span> (<span class="greentext">$<%= session[:payout] %></span>)</span></span><% end %></li>
                     </ul>
             </div>
 
