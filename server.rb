@@ -15,7 +15,7 @@ $odds = [1,1]
 $playerstats = {}
 
 $players = ["Player 1", "Player 2"]
-$betting = true
+$betting = false
 
 get '/' do
 	if session[:username]
@@ -69,6 +69,7 @@ end
 
 get '/logout' do
 	session[:username] = nil
+	session[:lastbet] = 0
 	redirect "/"
 end
 
