@@ -35,7 +35,7 @@
 							<span style="font-size:1.2em;">Place your bet - <span class="hudtext"> Salty Bucks </span><span class="greentext">$</span><span id="balance" class="greentext"><%= $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'").getvalue(0,0) %></span></span>
 
                     <br/>
-                    <input type="number" name="wager" min="0" id="wager" placeholder="Wager"/><br/>
+										<input type="number" name="wager" min="0" max="<%= $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'").getvalue(0,0) %>" id="wager" placeholder="Wager" style="width: 10em"/><br/>
                     <ul>
 												<% if params.keys.include?("selectedplayer") %>
                         	<li class="menu"><img src="<%= params[:selectedplayer]=="0" ? "loadred.GIF" : "loadblue.GIF" %>" /></li>
