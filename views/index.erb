@@ -23,7 +23,7 @@
 
         <!-- Status Bar -->
         <div id="status">
-                <span id="betstatus"<%= getStatus() %></span> <!-- Sonic the hedgehog wins! Payouts to Team Red. red color-->
+						<span id="betstatus"<%=h getStatus() %></span> <!-- Sonic the hedgehog wins! Payouts to Team Red. red color-->
                 <input type="hidden" id="u" name="u" value ="318134" />
                 <input type="hidden" id="b" name="b" value ="500" />
         </div>
@@ -32,21 +32,21 @@
         <div id="bottomcontent">
             <!-- Wager Information -->
             <div id="wagerwrapper">
-							<span style="font-size:1.2em;">Place your bet - <span class="hudtext"> Salty Bucks </span><span class="greentext">$</span><span id="balance" class="greentext"><%= $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'").getvalue(0,0) %></span></span>
+							<span style="font-size:1.2em;">Place your bet - <span class="hudtext"> Salty Bucks </span><span class="greentext">$</span><span id="balance" class="greentext"><%=h $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'").getvalue(0,0) %></span></span>
 
                     <br/>
                     <input type="number" name="wager" min="0" id="wager" placeholder="Wager"/><br/>
                     <ul>
 												<% if params.keys.include?("selectedplayer") %>
-                        	<li class="menu"><img src="<%= params[:selectedplayer]=="0" ? "loadred.GIF" : "loadblue.GIF" %>" /></li>
+                        	<li class="menu"><img src="<%=h params[:selectedplayer]=="0" ? "loadred.GIF" : "loadblue.GIF" %>" /></li>
 												<% elsif $winner == nil %>
                         	<li class="menu"><span class="hudtext"> Last Bet </span><span id="lastbet">
-														<span id="lastbet" style="display: inline;"><%= ($playerbets != {} and $playerbets[session[:username]] != nil and $playerbets[session[:username]][1] != 0) ? "$"+session[:lastbet].to_s : "N/A"  %> <% if $playerbets[session[:username]] != nil and $playerbets[session[:username]][1] != 0 %> on <% if session[:lastpick].to_i==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span><% end %></span></span>
+														<span id="lastbet" style="display: inline;"><%=h ($playerbets != {} and $playerbets[session[:username]] != nil and $playerbets[session[:username]][1] != 0) ? "$"+session[:lastbet].to_s : "N/A"  %> <% if $playerbets[session[:username]] != nil and $playerbets[session[:username]][1] != 0 %> on <% if session[:lastpick].to_i==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%=h $players[session[:lastpick].to_i] %></span><% end %></span></span>
 												<% else %>
                         	<li class="menu"><span class="hudtext"> Winner: </span><span id="lastbet">
-													<span id="lastbet" style="display: inline;"><% if $winner == 0 %><span class="redtext"><% elsif $winner == 1 %><span class="bluetext"><% end %><%= $players[$winner] %></span></span>
+													<span id="lastbet" style="display: inline;"><% if $winner == 0 %><span class="redtext"><% elsif $winner == 1 %><span class="bluetext"><% end %><%=h $players[$winner] %></span></span>
 													<% end %></li>
-													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $betting or session[:lastbet] == 0 or session[:lastbet] == nil or $odds == [-1,-1] %>N/A<% else %><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%= $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%= $odds[1] %></span> (<span class="greentext">$<%= session[:payout] %></span>)</span></span><% end %></li>
+													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $betting or session[:lastbet] == 0 or session[:lastbet] == nil or $odds == [-1,-1] %>N/A<% else %><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%=h $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%=h $odds[1] %></span> (<span class="greentext">$<%=h session[:payout] %></span>)</span></span><% end %></li>
                     </ul>
             </div>
 
@@ -55,8 +55,8 @@
                 <!-- Red Card -->
                 <div class="betcard left redborder">
                     <div class="left">
-											<span id="p1name" class="redtext"><%= $players[0] %></span><br/><br/>
-												<span class="field" id="player1wager"><% if !$betting %><%= $bets[0] %><% else %><img src="potload.gif" /><% end %></span><br/>
+											<span id="p1name" class="redtext"><%=h $players[0] %></span><br/><br/>
+												<span class="field" id="player1wager"><% if !$betting %><%=h $bets[0] %><% else %><img src="potload.gif" /><% end %></span><br/>
                     </div>
                     <div class="right">
     
@@ -73,8 +73,8 @@
                         </span>
                     </div>
                     <div class="right">
-											<span id="p2name" class="bluetext"><%= $players[1] %></span><br/><br/>
-												<span class="field" id="player2wager"><% if !$betting %><%= $bets[1] %><% else %><img src="potload.gif" /><% end %></span><br/>
+											<span id="p2name" class="bluetext"><%=h $players[1] %></span><br/><br/>
+												<span class="field" id="player2wager"><% if !$betting %><%=h $bets[1] %><% else %><img src="potload.gif" /><% end %></span><br/>
                     </div>
     
                 </div>
@@ -88,7 +88,7 @@
                 <a href="/logout">Logout</a>
             </div>
             <div class="footerright">
-							<%= session[:username] %> (#<%= playerRank(session[:username]) %>)
+							<%=h session[:username] %> (#<%=h playerRank(session[:username]) %>)
             </div>
             <div class="footercenter" align="center" style="position: fixed; left: 25%;">
                 <a href="http://www.ccorgs.com/events/528e7b7e11dd520200000001">Sign into the event!</a>
