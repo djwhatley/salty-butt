@@ -12,7 +12,7 @@ $bucks_min = 50
 
 $playerbets = {}
 $bets = [0,0]
-$odds = [1,1]
+$odds = [nil, nil]
 $playerstats = {}
 
 $players = ["Player 1", "Player 2"]
@@ -38,12 +38,14 @@ end
 def getStatus()
 	str = ">" + $status
 	
-	if $winner == 0
-		str = " class=\"redtext\"" + str
-	elsif $winner == 1
-		str = " class=\"bluetext\"" + str
+	if $status.includes?("payout")
+		if $winner == 0
+			str = " class=\"redtext\"" + str
+		elsif $winner == 1
+			str = " class=\"bluetext\"" + str
+		end
+		return str
 	end
-	return str
 end
 
 get '/' do
@@ -124,12 +126,12 @@ post '/admin' do
 		end
 		$status += "."
 
-		$odds = [1,1]
+		$odds = [nil, nil]
 		$bets = [0,0]
 	end
 
 	if params[:betting] and params[:betting] == "start"
-		$odds = [1,1]
+		$odds = [nil, nil]
 		$bets = [0,0]
 		$playerbets = {}
 		$betting = true
