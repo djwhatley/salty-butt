@@ -4,7 +4,7 @@ require 'bcrypt'
 
 enable :sessions
 
-$db = PGconn.open("localhost", 5432)
+$db = PGconn.open("ec2-54-204-43-138.compute-1.amazonaws.com", 5432, "", "", "deia47rhsmpbi8", "gxhlypbwsapuqu", "MlcweE_dk0Zn2TOXyU5aBhmwml")
 $db.exec('CREATE TABLE IF NOT EXISTS Users(Name TEXT PRIMARY KEY, Salt TEXT, Hash TEXT, Bucks INTEGER)')
 
 $bucks_min = 50
