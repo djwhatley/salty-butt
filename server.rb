@@ -95,8 +95,6 @@ post '/admin' do
 			$odds[1] = ($bets[1].to_f / $bets[0]).round(1)
 			$odds[0] = 1
 		end
-		$players[0] = "Player 1"
-		$players[1] = "Player 2"
 		$betting = false
 	end
 	erb :admin
