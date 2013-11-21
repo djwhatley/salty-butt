@@ -116,13 +116,14 @@ post '/admin' do
 			end
 		end
 
-		$status = $players[params[:winner].to_i-1] + " wins! Payouts to Team "
-		if (params[:winner] == "1")
+		$status = $players[$winner] + " wins! Payouts to Team "
+		if ($winner == 0)
 			$status += "Red"
-		else
+		elsif $winner == 1
 			$status += "Blue"
 		end
 		$status += "."
+
 		$odds = [1,1]
 		$bets = [0,0]
 	end
