@@ -5,14 +5,14 @@ require 'bcrypt'
 set server: 'thin'
 enable :sessions
 
-$db = PGconn.open("localhost", 5432)
+$db = PGconn.open("ec2-54-204-43-138.compute-1.amazonaws.com", 5432, "", "", "deia47rhsmpbi8", "gxhlypbwsapuqu", "MlcweE_dk0Zn2TOXyU5aBhmwml")
 $db.exec('CREATE TABLE IF NOT EXISTS Users(Name TEXT PRIMARY KEY, Salt TEXT, Hash TEXT, Bucks INTEGER)')
 
 $bucks_min = 50
 
 $playerbets = {}
 $bets = [0,0]
-$odds = [1,2]
+$odds = [1,1]
 $playerstats = {}
 
 $players = ["Player 1", "Player 2"]
@@ -55,8 +55,8 @@ post '/login' do
 	end
 	a = $db.exec("SELECT * FROM Users WHERE Name = \'#{params[:username]}\'")
 	if !a.to_a.empty?
-		salt = a.getvalue(0,2)
-		if a.getvalue(0,3) == BCrypt::Engine.hash_secret(params[:password], salt)
+		salt = a.getvalue(0,1)
+		if a.getvalue(0,2) == BCrypt::Engine.hash_secret(params[:password], salt)
 			session[:username] = params[:username]
 		end
 	else
@@ -86,6 +86,8 @@ post '/admin' do
 		$bets = [0,0]
 		$playerbets = {}
 		$betting = true
+		$players[0] = params[:p1name]
+		$players[1] = params[:p2name]
 	else
 		for bet in $playerbets
 			$bets[bet[1][0].to_i] += bet[1][1].to_i

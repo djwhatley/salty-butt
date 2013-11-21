@@ -36,7 +36,7 @@
 							<span style="font-size:1.2em;">Place your bet - <span class="hudtext"> Salty Bucks </span><span class="greentext">$</span><span id="balance" class="greentext"><%= $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'").getvalue(0,0) %></span></span>
 
                     <br/>
-                    <input type="text" name="wager" id="wager" placeholder="Wager"/><br/>
+                    <input type="number" name="wager" id="wager" placeholder="Wager"/><br/>
                     <ul>
                         <li class="menu"><span class="hudtext"> Last Bet </span><span id="lastbet">
 													<span id="lastbet" style="display: inline;"><%= session[:lastbet] ? "$"+session[:lastbet] : "N/A"  %> on <% if session[:lastpick]==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span></span></span></li>
@@ -49,7 +49,7 @@
                 <!-- Red Card -->
                 <div class="betcard left redborder">
                     <div class="left">
-                        <span id="p1name" class="redtext">Player 1</span><br/><br/>
+											<span id="p1name" class="redtext"><%= $players[0] %></span><br/><br/>
 												<span class="field" id="player1wager"><% if !$betting %><%= $bets[0] %><% else %>-<% end %></span><br/>
                     </div>
                     <div class="right">
@@ -67,7 +67,7 @@
                         </span>
                     </div>
                     <div class="right">
-                        <span id="p2name" class="bluetext">Player 2</span><br/><br/>
+											<span id="p2name" class="bluetext"><%= $players[1] %></span><br/><br/>
 												<span class="field" id="player2wager"><% if !$betting %><%= $bets[1] %><% else %>-<% end %></span><br/>
                     </div>
     
