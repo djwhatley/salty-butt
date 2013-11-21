@@ -20,6 +20,18 @@ $betting = false
 
 connections = []
 
+def playerRank(name)
+		i = 0
+		res = $db.exec('SELECT name, bucks FROM users ORDER BY bucks DESC')
+		res.field_values('name').each{|result|
+			i += 1 
+			if result == name
+				return i
+			end
+		}
+		return -1
+end
+
 get '/' do
 	$locked = true
 	if session[:username]
