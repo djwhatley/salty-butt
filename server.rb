@@ -105,10 +105,16 @@ get '/logout' do
 end
 
 get '/admin' do
+	if session[:username] != "duane"
+		return
+	end
 	erb :admin
 end
 
 post '/admin' do
+	if session[:username] != "duane"
+		return
+	end
 	if params[:winner] == "1" or params[:winner] == "2"
 		$winner = params[:winner].to_i-1
 		for bet in $playerbets
