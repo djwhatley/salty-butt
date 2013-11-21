@@ -37,7 +37,9 @@
                     <br/>
                     <input type="number" name="wager" min="0" id="wager" placeholder="Wager"/><br/>
                     <ul>
-												<% if $winner == nil %>
+												<% if params.keys.include?("selectedplayer") %>
+                        	<li class="menu"><img src="<%= params[:selectedplayer] %>" /></li>
+												<% elsif $winner == nil %>
                         	<li class="menu"><span class="hudtext"> Last Bet </span><span id="lastbet">
 														<span id="lastbet" style="display: inline;"><%= ($playerbets != {} and $playerbets[session[:username]] != nil and $playerbets[session[:username]][1] != 0) ? "$"+session[:lastbet].to_s : "N/A"  %> <% if $playerbets[session[:username]] != nil and $playerbets[session[:username]][1] != 0 %> on <% if session[:lastpick].to_i==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span><% end %></span></span>
 												<% else %>
@@ -49,7 +51,7 @@
             </div>
 
             <!-- Fight Card -->
-                <input type="hidden" id="selectedplayer" name="selectedplayer" />
+                <input type="hidden" id="selectedplayer" name="selectedplayer" value="" />
                 <!-- Red Card -->
                 <div class="betcard left redborder">
                     <div class="left">
@@ -59,7 +61,7 @@
                     <div class="right">
     
                         <span class="submit">
-                            <input name="player1" type="submit" value="" class="betbuttonred"/>
+                            <input name="player1" type="submit" value="" class="betbuttonred" id="betbuttonred"/>
                         </span>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
                 <div class="betcard right blueborder">
                     <div class="left">
                         <span class="submit">
-                            <input name="player2" type="submit" value="" class="betbuttonblue"/>
+                            <input name="player2" type="submit" value="" class="betbuttonblue" id="betbuttonblue"/>
                         </span>
                     </div>
                     <div class="right">
