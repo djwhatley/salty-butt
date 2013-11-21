@@ -140,7 +140,7 @@ post '/admin' do
 		$betting = true
 		$players[0] = params[:p1name]
 		$players[1] = params[:p2name]
-		$status = "Bets are now open"
+		$status = "Bets are now open."
 		$winner = nil
 	elsif params[:betting] and params[:betting] == "stop"
 		for bet in $playerbets
