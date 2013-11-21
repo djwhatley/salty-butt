@@ -26,9 +26,6 @@ get '/' do
 	else
 		redirect "/login"
 	end
-	while $bets[0] == 0
-		erb :index
-	end
 end
 
 post '/' do
