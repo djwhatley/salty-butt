@@ -38,7 +38,7 @@ end
 def getStatus()
 	str = ">" + $status
 	
-	if $status.includes?("payout")
+	if $status.include?("payout")
 		if $winner == 0
 			str = " class=\"redtext\"" + str
 		elsif $winner == 1
