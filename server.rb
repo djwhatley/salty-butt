@@ -38,9 +38,9 @@ end
 def getStatus()
 	str = ">" + $status
 	
-	if params[:winner] == "1"
+	if $winner == 0
 		str = " class=\"redtext\"" + str
-	elsif params[:winner] == "2"
+	elsif $winner == 1
 		str = " class=\"bluetext\"" + str
 	end
 	return str
