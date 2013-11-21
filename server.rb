@@ -82,6 +82,8 @@ post '/admin' do
 		$bets = [0,0]
 		$playerbets = {}
 		$betting = true
+		$players[0] = params[:p1name]
+		$players[1] = params[:p2name]
 	else
 		for bet in $playerbets
 			$bets[bet[1][0].to_i] += bet[1][1].to_i
@@ -93,6 +95,8 @@ post '/admin' do
 			$odds[1] = ($bets[1].to_f / $bets[0]).round(1)
 			$odds[0] = 1
 		end
+		$players[0] = "Player 1"
+		$players[1] = "Player 2"
 		$betting = false
 	end
 	erb :admin
