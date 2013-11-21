@@ -17,6 +17,7 @@ $playerstats = {}
 
 $players = ["Player 1", "Player 2"]
 $betting = false
+$status = "Waiting for the next match."
 
 connections = []
 
@@ -30,6 +31,17 @@ def playerRank(name)
 			end
 		}
 		return -1
+end
+
+def getStatus()
+	str = ">" + $status
+	
+	if params[:winner] == "1"
+		str = " class=\"redtext\"" + str
+	elsif params[:winner] == "2"
+		str = " class=\"bluetext\"" + str
+	end
+	return str
 end
 
 get '/' do
@@ -101,6 +113,13 @@ post '/admin' do
 			end
 		end
 
+		$status = $players[params[:winner].to_i-1] + " wins! Payouts to Team "
+		if (params[:winner] == "1")
+			$status += "Red"
+		else
+			$status += "Blue"
+		end
+		$status += "."
 		$odds = [1,1]
 		$bets = [0,0]
 	end
@@ -112,6 +131,7 @@ post '/admin' do
 		$betting = true
 		$players[0] = params[:p1name]
 		$players[1] = params[:p2name]
+		$status = "Bets are now open"
 	else
 		for bet in $playerbets
 			$bets[bet[1][0].to_i] += bet[1][1].to_i
@@ -124,6 +144,7 @@ post '/admin' do
 			$odds[0] = 1
 		end
 		$betting = false
+		$status = "Bets are locked until the end of the match."
 	end
 	connections.each { |out| out << "data: {\"refresh\":1}\n\n"}
 	erb :admin
