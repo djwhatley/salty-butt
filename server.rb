@@ -99,3 +99,15 @@ post '/admin' do
 	end
 	erb :admin
 end
+
+get '/new_match_info' do
+   content_type 'text/event-stream'
+   newevent = false
+   response = "data: "+"WHATEVER YOU WANT"+" \n\n"
+end
+
+get '/new_bet_info' do
+   content_type 'text/event-stream'
+   newevent = false
+   response = "data: "+"WHATEVER YOU WANT"+" \n\n"
+end

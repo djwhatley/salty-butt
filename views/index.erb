@@ -9,17 +9,6 @@
         <link rel="stylesheet" type="text/css" href="master.css"/>
         <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 
-				<script>
-				function validateForm()
-				{
-					var bet = document.forms["fightcard"]["wager"].value;
-					if (bet==null || bet=="")
-					{
-						//alert("You must put in a bet!");
-						return false;
-					}
-				}
-				</script>
 
     </head>
     <body>
@@ -96,5 +85,18 @@
 							<%= session[:username] %> (#<span id="ranking">36655</span>)
             </div>
         </div> <!-- End Footer -->
+
+        <script>
+        function validateForm()
+        {
+            var bet = document.forms["fightcard"]["wager"].value;
+            if (bet==null || bet=="")
+            {
+                //alert("You must put in a bet!");
+                return false;
+            }
+        }
+        </script>
+        <script type="text/javascript" src="script.js"></script>        
     </body>
 </html>
