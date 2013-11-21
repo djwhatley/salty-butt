@@ -44,7 +44,8 @@
         <div id="bottomcontent">
             <!-- Wager Information -->
             <div id="wagerwrapper">
-							<span style="font-size:1.2em;">Place your bet - <span class="hudtext"> Salty Bucks </span><span class="greentext">$</span><span id="balance" class="greentext"><%= $db.execute("SELECT Bucks FROM Users WHERE Name IS \"#{session[:username]}\"")[0][0] %></span></span>
+							<span style="font-size:1.2em;">Place your bet - <span class="hudtext"> Salty Bucks </span><span class="greentext">$</span><span id="balance" class="greentext"><%= $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'").getvalue(0,0) %></span></span>
+
                     <br/>
                     <input type="text" name="wager" id="wager" placeholder="Wager"/><br/>
                     <ul>
