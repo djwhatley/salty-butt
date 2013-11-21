@@ -51,8 +51,8 @@ post '/login' do
 	end
 	a = $db.exec("SELECT * FROM Users WHERE Name = \'#{params[:username]}\'")
 	if !a.to_a.empty?
-		salt = a.getvalue(0,2)
-		if a.getvalue(0,3) == BCrypt::Engine.hash_secret(params[:password], salt)
+		salt = a.getvalue(0,1)
+		if a.getvalue(0,2) == BCrypt::Engine.hash_secret(params[:password], salt)
 			session[:username] = params[:username]
 		end
 	else
