@@ -49,8 +49,8 @@
                     <input type="text" name="wager" id="wager" placeholder="Wager"/><br/>
                     <ul>
                         <li class="menu"><span class="hudtext"> Last Bet </span><span id="lastbet">
-													<span id="lastbet" style="display: inline;"><%= session[:lastbet] ? "$"+session[:lastbet] : "N/A"  %> on <% if session[:lastpick]==1 %><span class="redtext"><% else %><span class="bluetext"><% end %><%= $players[session[:lastpick].to_i] %></span></span></span></li>
-													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%= $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%= $odds[1] %></span> (<span class="greentext">$<%= session[:payout] %></span>)</span></span></li>
+													<span id="lastbet" style="display: inline;"><%= session[:lastbet] ? "$"+session[:lastbet] : "N/A"  %> on <% if session[:lastpick]==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span></span></span></li>
+													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $betting %>N/A<% else %><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%= $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%= $odds[1] %></span> (<span class="greentext">$<%= session[:payout] %></span>)</span></span><% end %></li>
                     </ul>
             </div>
 
@@ -60,7 +60,7 @@
                 <div class="betcard left redborder">
                     <div class="left">
                         <span id="p1name" class="redtext">Player 1</span><br/><br/>
-                        <span class="field" id="player1wager">$50</span><br/>
+												<span class="field" id="player1wager"><% if !$betting %><%= $bets[0] %><% else %>-<% end %></span><br/>
                     </div>
                     <div class="right">
     
@@ -78,7 +78,7 @@
                     </div>
                     <div class="right">
                         <span id="p2name" class="bluetext">Player 2</span><br/><br/>
-                        <span class="field" id="player2wager">$255,456</span><br/>
+												<span class="field" id="player2wager"><% if !$betting %><%= $bets[1] %><% else %>-<% end %></span><br/>
                     </div>
     
                 </div>
