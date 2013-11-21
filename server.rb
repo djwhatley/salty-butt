@@ -125,9 +125,6 @@ post '/admin' do
 			$status += "Blue"
 		end
 		$status += "."
-
-		$odds = [-1, -1]
-		$bets = [0,0]
 	end
 
 	if params[:betting] and params[:betting] == "start"
