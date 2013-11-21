@@ -2,6 +2,7 @@ require 'sinatra'
 require 'pg'
 require 'bcrypt'
 
+set server: 'thin'
 enable :sessions
 
 $db = PGconn.open("localhost", 5432)
@@ -17,7 +18,10 @@ $playerstats = {}
 $players = ["Player 1", "Player 2"]
 $betting = true
 
+connections = []
+
 get '/' do
+	$locked = true
 	if session[:username]
 		if session[:lastbet].to_i > 0 and $bets[session[:lastpick]].to_i > 0
 			session[:payout] = (($bets[0]+$bets[1]).to_f / $bets[session[:lastpick]].to_i * session[:lastbet].to_i).truncate
@@ -95,17 +99,16 @@ post '/admin' do
 		end
 		$betting = false
 	end
+	connections.each { |out| out << "data: {\"refresh\":1}\n\n"}
 	erb :admin
 end
 
-get '/new_match_info' do
-   content_type 'text/event-stream'
-   newevent = false
-   response = "data: "+"WHATEVER YOU WANT"+" \n\n"
-end
+get '/refresh', provides: 'text/event-stream' do
+	stream :keep_open do |out|
+		connections << out
 
-get '/new_bet_info' do
-   content_type 'text/event-stream'
-   newevent = false
-   response = "data: "+"WHATEVER YOU WANT"+" \n\n"
+		out.callback {
+    	connections.delete(out)
+    }
+	end
 end

@@ -1,4 +1,4 @@
-var source = new EventSource('pull');
-source.addEventListener('message', function(e) {
-	console.log(e.data);
-}, false);
+var es = new EventSource('/refresh');
+es.onmessage = function(e) {
+	window.location.reload(true);  
+}
