@@ -1,40 +1,99 @@
+
+<!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Salty Butt">
+        <meta name="description" content="A localized Salty Bet game for a SAB@CC event.">
+        <title>Salty Butt</title>
+        <link rel="stylesheet" type="text/css" href="master.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 
-<head>
-<title>Salty Butt!</title>
+				<script>
+				function validateForm()
+				{
+					var bet = document.forms["fightcard"]["wager"].value;
+					if (bet==null || bet=="")
+					{
+						//alert("You must put in a bet!");
+						return false;
+					}
+				}
+				</script>
 
-<script>
-function validateForm()
-{
-	var bet = document.forms["butt"]["bet"].value;
-	if (bet==null || bet=="")
-	{
-		alert("You must put in a bet!");
-		return false;
-	}
-}
+    </head>
+    <body>
+        <!-- Begin Header/Navigation -->
+        <div id="header">
+            <div style="position:absolute; left:0">
+                <a href="/" id="logo"><img src="SALTYBETheader2.png"></a>
+            </div>
+            <!--<div style="display:inline-block; margin:6px; font-size:20px;">
+                <span id="tournamentname">Duane's Fantabulous Salt Emporium</span>
+            </div>-->
+        </div>
 
-</script>
-</head>
+        <!-- Status Bar -->
+        <div id="status">
+                <span id="betstatus">Waiting for the next match.</span> <!-- Sonic the hedgehog wins! Payouts to Team Red. red color-->
+                <input type="hidden" id="u" name="u" value ="318134" />
+                <input type="hidden" id="b" name="b" value ="500" />
+        </div>
+        
+            <form id="fightcard" name="fightcard" action="/" method="post" onsubmit="return validateForm()">
+        <div id="bottomcontent">
+            <!-- Wager Information -->
+            <div id="wagerwrapper">
+							<span style="font-size:1.2em;">Place your bet - <span class="hudtext"> Salty Bucks </span><span class="greentext">$</span><span id="balance" class="greentext"><%= $db.execute("SELECT Bucks FROM Users WHERE Name IS \"#{session[:username]}\"")[0][0] %></span></span>
+                    <br/>
+                    <input type="text" name="wager" id="wager" placeholder="Wager"/><br/>
+                    <ul>
+                        <li class="menu"><span class="hudtext"> Last Bet </span><span id="lastbet">
+													<span id="lastbet" style="display: inline;"><%= session[:lastbet] ? "$"+session[:lastbet] : "N/A"  %> on <% if session[:lastpick]==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span></span></span></li>
+													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $betting %>N/A<% else %><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%= $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%= $odds[1] %></span> (<span class="greentext">$<%= session[:payout] %></span>)</span></span><% end %></li>
+                    </ul>
+            </div>
 
-<body>
-<% if session[:username] %>
-	Welcome, <%= session[:username] %>!<br /><br />
-	Your bucks: <%= $db.execute("SELECT Bucks FROM Users WHERE Name IS \"#{session[:username]}\"")[0][0] %>
-	<form name="butt" action="" method="post" onSubmit="return validateForm()">
-		Place your bets! 
-		<br />
-		<input type="number" name="bet" />	
-		<br />
-		<input type="submit" name="player" value="Player 1" />
-		<input type="submit" name="player" value="Player 2" />
-	</form>
-	<form name="salty" action="/logout">
-		<input type="submit" value="Log Out" />
-	</form>
-<% else %>
-
-<% end %>
-</body>
-
+            <!-- Fight Card -->
+                <input type="hidden" id="selectedplayer" name="selectedplayer" />
+                <!-- Red Card -->
+                <div class="betcard left redborder">
+                    <div class="left">
+                        <span id="p1name" class="redtext">Player 1</span><br/><br/>
+												<span class="field" id="player1wager"><% if !$betting %><%= $bets[0] %><% else %>-<% end %></span><br/>
+                    </div>
+                    <div class="right">
+    
+                        <span class="submit">
+                            <input name="player1" type="submit" value="" class="betbuttonred"/>
+                        </span>
+                    </div>
+                </div>
+                <!-- Blue Card -->
+                <div class="betcard right blueborder">
+                    <div class="left">
+                        <span class="submit">
+                            <input name="player2" type="submit" value="" class="betbuttonblue"/>
+                        </span>
+                    </div>
+                    <div class="right">
+                        <span id="p2name" class="bluetext">Player 2</span><br/><br/>
+												<span class="field" id="player2wager"><% if !$betting %><%= $bets[1] %><% else %>-<% end %></span><br/>
+                    </div>
+    
+                </div>
+                
+            </form>
+            <!-- End Fight Card -->
+        </div>
+        <!-- Begin Footer -->
+        <div id="footer">
+            <div class="footerleft">
+                <a href="/logout">Logout</a>
+            </div>
+            <div class="footerright">
+							<%= session[:username] %> (#<span id="ranking">36655</span>)
+            </div>
+        </div> <!-- End Footer -->
+    </body>
 </html>
