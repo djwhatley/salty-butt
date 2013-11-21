@@ -44,7 +44,7 @@
                         	<li class="menu"><span class="hudtext"> Winner: </span><span id="lastbet">
 													<span id="lastbet" style="display: inline;"><% if $winner == 0 %><span class="redtext"><% elsif $winner == 1 %><span class="bluetext"><% end %><%= $players[$winner] %></span></span>
 													<% end %></li>
-													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $betting or session[:lastbet] == 0 or session[:lastbet] == nil or $odds == [nil, nil] %>N/A<% else %><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%= $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%= $odds[1] %></span> (<span class="greentext">$<%= session[:payout] %></span>)</span></span><% end %></li>
+													<li class="menu"><span class="hudtext"> Odds </span><span id="odds"><span id="odds" style="display: inline;"><% if $betting or session[:lastbet] == 0 or session[:lastbet] == nil or $odds == [-1,-1] %>N/A<% else %><% if $odds[0] != 1 %><span class="redtext"><% else %><span><% end %><%= $odds[0] %></span>:<% if $odds[1] != 1 %><span class="bluetext"><% else %><span><% end %><%= $odds[1] %></span> (<span class="greentext">$<%= session[:payout] %></span>)</span></span><% end %></li>
                     </ul>
             </div>
 

@@ -12,7 +12,7 @@ $bucks_min = 50
 
 $playerbets = {}
 $bets = [0,0]
-$odds = [nil, nil]
+$odds = [-1,-1]
 $playerstats = {}
 
 $players = ["Player 1", "Player 2"]
@@ -126,12 +126,12 @@ post '/admin' do
 		end
 		$status += "."
 
-		$odds = [nil, nil]
+		$odds = [-1, -1]
 		$bets = [0,0]
 	end
 
 	if params[:betting] and params[:betting] == "start"
-		$odds = [nil, nil]
+		$odds = [-1,-1]
 		$bets = [0,0]
 		$playerbets = {}
 		$betting = true
