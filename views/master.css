@@ -5,6 +5,7 @@ html,body{
     margin: 0px;
     padding: 0px;
     height:100%;
+    background-color: #252525;
 }
 div#wrapper{
     margin: 0 auto;
@@ -106,6 +107,7 @@ img {
     right: 0px;
     border-top: 1px solid darkgreen;
     padding-top:5px;
+    background-color: #fff;
 }
 .footerleft{
     float: left;
@@ -142,6 +144,7 @@ div#header{
     text-align:center;
     border-bottom: 1px solid black;
     padding-bottom: 1px;
+    background-color: #FFF;
 }
 #nav-menu{
     position:absolute; 
