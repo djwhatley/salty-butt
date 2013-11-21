@@ -61,7 +61,7 @@ get '/' do
 end
 
 post '/' do
-	if $betting and params[:wager] <= $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'").getvalue(0,0)
+	if $betting and (params[:wager].to_i <= $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'").getvalue(0,0).to_i)
 		session[:lastbet] = params[:wager]
 		session[:lastpick] = params[:player1]=="" ? 0 : 1
 		$playerbets[session[:username]] = [session[:lastpick], session[:lastbet]]
