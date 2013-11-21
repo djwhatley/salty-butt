@@ -83,10 +83,9 @@ end
 post '/admin' do
 	if params[:winner] == "1" or params[:winner] == "2"
 		for bet in $playerbets
+			#$db.exec("UPDATE Users SET Bucks = Bucks - #{bet[1][1].to_i} WHERE Name = \'#{bet[0]}\'")
 			if bet[1][0].to_i == params[:winner].to_i-1
 				$db.exec("UPDATE Users SET Bucks = Bucks + #{(($bets[0]+$bets[1]).to_f / $bets[bet[1][0].to_i] * bet[1][1].to_i).truncate} WHERE Name = \'#{bet[0]}\'")
-			else
-				$db.exec("UPDATE Users SET Bucks = Bucks - #{bet[1][1]} WHERE Name = \'#{bet[0]}\'")
 			end
 		end
 
