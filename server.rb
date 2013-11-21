@@ -44,8 +44,8 @@ def getStatus()
 		elsif $winner == 1
 			str = " class=\"bluetext\"" + str
 		end
-		return str
 	end
+	return str
 end
 
 get '/' do
