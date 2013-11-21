@@ -81,10 +81,10 @@
                 <a href="/logout">Logout</a>
             </div>
             <div class="footerright">
-							<%= session[:username] %> (#<span id="ranking">36655</span>)
+							<%= session[:username] %> (#<%= playerRank(session[:username]) %>)
             </div>
             <div class="footercenter">
-                <a href="http://www.ccorgs.com">Sign into the event!</a>
+                <a href="http://www.ccorgs.com/orgs/sab">Sign into the event!</a>
             </div>
         </div> <!-- End Footer -->
 
