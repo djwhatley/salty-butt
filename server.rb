@@ -38,7 +38,7 @@ end
 def getStatus()
 	str = ">" + $status
 	
-	if $status.include?("payout")
+	if $status.include?("Payout")
 		if $winner == 0
 			str = " class=\"redtext\"" + str
 		elsif $winner == 1
@@ -61,9 +61,9 @@ get '/' do
 end
 
 post '/' do
-	session[:lastbet] = params[:wager]
-	session[:lastpick] = params[:player1]=="" ? 0 : 1
-	if $betting
+	if $betting and params[:lastbet] <= $db.exec("SELECT Bucks FROM Users WHERE Name = \'#{session[:username]}\'")
+		session[:lastbet] = params[:wager]
+		session[:lastpick] = params[:player1]=="" ? 0 : 1
 		$playerbets[session[:username]] = [session[:lastpick], session[:lastbet]]
 	end
 	erb :index
