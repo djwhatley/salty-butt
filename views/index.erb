@@ -39,7 +39,7 @@
                     <ul>
 												<% if $winner == nil %>
                         	<li class="menu"><span class="hudtext"> Last Bet </span><span id="lastbet">
-													<span id="lastbet" style="display: inline;"><%= (session[:lastbet] != nil and session[:lastbet] != 0) ? "$"+session[:lastbet].to_s : "N/A"  %> <% if session[:lastbet] != 0 and session[:lastbet] != nil %> on <% if session[:lastpick].to_i==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span><% end %></span></span>
+														<span id="lastbet" style="display: inline;"><%= ($playerbets != {} and $playerbets[session[:username]] != nil and $playerbets[session[:username]][1] != 0) ? "$"+session[:lastbet].to_s : "N/A"  %> <% if session[:lastbet] != 0 and session[:lastbet] != nil %> on <% if session[:lastpick].to_i==1 %><span class="bluetext"><% else %><span class="redtext"><% end %><%= $players[session[:lastpick].to_i] %></span><% end %></span></span>
 												<% else %>
                         	<li class="menu"><span class="hudtext"> Winner: </span><span id="lastbet">
 													<span id="lastbet" style="display: inline;"><% if $winner == 0 %><span class="redtext"><% elsif $winner == 1 %><span class="bluetext"><% end %><%= $players[$winner] %></span></span>
