@@ -9,5 +9,10 @@
 		<input type="submit" name="betting" value="start" />
 		<input type="submit" name="betting" value="stop" />
 	</form>
+	
+<% 	output = ""
+		i = 0
+		$db.exec('SELECT name, bucks FROM users ORDER BY bucks DESC').each{|result| output += (i+=1).to_s + "\t" + result.to_s + "<br/>\n" } %>
+<%= output %>
 </body>
 </html>
