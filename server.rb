@@ -93,7 +93,7 @@ post '/admin' do
 		$bets = [0,0]
 	end
 
-	if params[:betting] == "start"
+	if params[:betting] and params[:betting] == "start"
 		$odds = [1,1]
 		$bets = [0,0]
 		$playerbets = {}
